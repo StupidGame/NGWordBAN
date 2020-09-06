@@ -13,7 +13,6 @@ class main extends PluginBase implements Listener{
     $this->getLogger()->notice("読み込まれました");
     $this->config = new config($this->getDataFolder() . "config.yml", Config::YAML);
     $this->config->set("aho","あぱーと");
-　}
 
   }
 }
