@@ -12,8 +12,8 @@ class main extends PluginBase implements Listener{
   public function onEnable(){
     $this->getLogger()->notice("読み込まれました");
     $this->config = new config($this->getDataFolder() . "config.yml", Config::YAML);
-    $this->config->set("aho","あぱーと");
+    $this->config->set("NGWord","");
+    $this->config->set("count","");
     $this->config->save();
-
   }
 }
