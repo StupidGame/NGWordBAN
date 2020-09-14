@@ -8,6 +8,8 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\utils\Config;
 use pocketmine\Server;
 use pocketmine\Player;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
 
 class main extends PluginBase implements Listener{
   public function onEnable(){
