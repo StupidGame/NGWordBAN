@@ -16,4 +16,11 @@ class main extends PluginBase implements Listener{
     $this->config->set("count","");
     $this->config->save();
   }
+
+  public function oncommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+   switch($command->getName()){
+     case "ngw":
+      $this->config->set("NGWord","$args[0]");
+   }
+  }
 }
