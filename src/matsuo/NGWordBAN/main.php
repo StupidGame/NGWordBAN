@@ -7,6 +7,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\utils\Config;
 use pocketmine\Server;
+use pocketmine\Player;
 
 class main extends PluginBase implements Listener{
   public function onEnable(){
@@ -21,6 +22,7 @@ class main extends PluginBase implements Listener{
    switch($command->getName()){
      case "ngw":
       $this->config->set("NGWord","$args[0]");
+      $player->sendMessage($args[0]."をNGワードに登録しました！");
    }
   }
 }
