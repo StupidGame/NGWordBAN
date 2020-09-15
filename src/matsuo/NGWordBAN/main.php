@@ -24,7 +24,7 @@ class main extends PluginBase implements Listener{
    switch($command->getName()){
      case "ngword":
       if($args[0]!==null){
-        $ngwlist = $this->config->get(NGWord);
+        $ngwlist = $this->config->get('NGWord');
         $ngwlist[] = "$args[0]";
         $this->config->set("NGWord",$ngwlist);
         $this->config->save();
