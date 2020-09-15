@@ -23,12 +23,16 @@ class main extends PluginBase implements Listener{
   public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
    switch($command->getName()){
      case "ngword":
-      $this->config->set("NGWord","$args[0]");
-      $this->config->save();
-      $sender->sendMessage($args[0]."をNGワードに登録しました！");
-      return true;
+      if($args[0]!==null){
+        $ngwlist = $this->config->get(NGWord);
+        $ngwlist[] = "$args[0]";
+        $this->config->set("NGWord",$ngwlist);
+        $this->config->save();
+        $sender->sendMessage($args[0]."をNGワードに登録しました！");
+        return true; 
+      }
       default:
-      return false;
+        return false;
    }   
   }
 }
