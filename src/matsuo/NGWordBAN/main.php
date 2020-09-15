@@ -20,11 +20,15 @@ class main extends PluginBase implements Listener{
     $this->config->save();
   }
 
-  public function oncommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+  public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
    switch($command->getName()){
-     case "ngw":
+     case "ngword":
       $this->config->set("NGWord","$args[0]");
-      $player->sendMessage($args[0]."をNGワードに登録しました！");
-   }
+      $this->config->save();
+      $sender->sendMessage($args[0]."をNGワードに登録しました！");
+      return true;
+      default:
+      return false;
+   }   
   }
 }
