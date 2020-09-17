@@ -17,6 +17,13 @@ class main extends PluginBase implements Listener{
     $this->config = new config($this->getDataFolder() . "config.yml", Config::YAML);
   }
 
+  public function onChat(PlayerChatEvent $event){
+   $message = $event->getMessage();
+   $ngwords = $this->config->get('NGWord');
+   foreach($ngwords as $value){
+     
+   }
+  }
   public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
    switch($command->getName()){
      case "ngword":
