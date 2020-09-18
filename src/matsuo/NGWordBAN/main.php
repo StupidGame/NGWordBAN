@@ -14,7 +14,7 @@ use pocketmine\command\CommandSender;
 class main extends PluginBase implements Listener{
   public function onEnable(){
     $this->getLogger()->notice("読み込まれました");
-    $this->config = new config($this->getDataFolder() . "config.yml", Config::YAML);
+    $config = $this->getConfig();
   }
 
   public function onChat(PlayerChatEvent $event){
