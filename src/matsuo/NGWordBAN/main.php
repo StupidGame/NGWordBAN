@@ -15,13 +15,21 @@ class main extends PluginBase implements Listener{
   public function onEnable(){
     $this->getLogger()->notice("読み込まれました");
     $config = $this->getConfig();
+    $this->getServer()->getPluginManager()->registerEvents($this, $this);
   }
 
   public function onChat(PlayerChatEvent $event){
    $message = $event->getMessage();
    $ngwords = $this->config->get('NGWord');
    foreach($ngwords as $value){
-     
+     if(preg_match('/$value/',$message)){
+      $event->setCancelled(); 
+      $player=$event->gettPlayer();
+      $playername=$player->getPlayer();
+      $this->config->set("Blacklist",$playername);
+      $event->setCancelled();
+     break;
+    }
    }
   }
   public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
