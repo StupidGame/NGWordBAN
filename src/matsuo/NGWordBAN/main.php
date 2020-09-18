@@ -27,6 +27,7 @@ class main extends PluginBase implements Listener{
       $player=$event->gettPlayer();
       $playername=$player->getPlayer();
       $this->config->set("Blacklist",$playername);
+      $this->config->save();
       $event->setCancelled();
      break;
     }
