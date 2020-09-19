@@ -29,6 +29,11 @@ $player = $event->getPlayer();
           $blacklist[] = "$playername";
         $this->getConfig()->set("Blacklist",$blacklist);
         $this->getConfig()->save();
+        foreach($blacklist as $banname){
+          if($banname === $playername){
+            $player->setBanned("NGワードの発言につきBANしました");
+          }
+        }
       $event->setCancelled();
      break;
     }
