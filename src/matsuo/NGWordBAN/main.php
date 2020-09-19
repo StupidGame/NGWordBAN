@@ -26,7 +26,9 @@ $player = $event->getPlayer();
      if(preg_match('{'.$value.'}',$message)){
       $playername=$player->getName();
      $blacklist = $this->getConfig()->get('Blacklist');
-     var_dump($blacklist);
+          $blacklist[] = "$playername";
+        $this->getConfig()->set("Blacklist",$blacklist);
+        $this->getConfig()->save();
       $event->setCancelled();
      break;
     }
@@ -35,7 +37,7 @@ $player = $event->getPlayer();
   public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
    switch($command->getName()){
      case "ngword":
-      if($args[0]!==null){
+      if(isset($args[0])){
         $ngwlist = $this->getConfig()->get('NGWord');
         $ngwlist[] = "$args[0]";
         $this->getConfig()->set("NGWord",$ngwlist);
