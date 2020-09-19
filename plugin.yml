@@ -10,3 +10,12 @@ commands:
    description: NGワードを登録
    usage: "/ngword 登録したいワード"
    permission: NGWordBAN.command.ngword
+　permissions:
+  # パーミッションの名前
+  NGWordBAN.command.ngword:
+    # パーミッションの説明
+    description: ngwordコマンドをOPのみ使えるようにします
+    # デフォルトパーミッション(ここではOPのみ)
+    # op, notop, true, falseなどが使用可能
+    # https://github.com/pmmp/PocketMine-MP/blob/3.0.0/src/pocketmine/permission/Permission.php#L43-L79
+    default: op
