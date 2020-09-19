@@ -20,14 +20,13 @@ class main extends PluginBase implements Listener{
 
   public function onChat(PlayerChatEvent $event){
    $message = $event->getMessage();
-   $ngwords = $this->config->get('NGWord');
+   $ngwords = $this->getConfig()->get('NGWord');
+$player = $event->getPlayer();
    foreach($ngwords as $value){
-     if(preg_match('/$value/',$message)){
-      $event->setCancelled(); 
-      $player=$event->gettPlayer();
-      $playername=$player->getPlayer();
-      $this->config->set("Blacklist",$playername);
-      $this->config->save();
+     if(preg_match('{'.$value.'}',$message)){
+      $playername=$player->getName();
+     $blacklist = $this->getConfig()->get('Blacklist');
+     var_dump($blacklist);
       $event->setCancelled();
      break;
     }
@@ -37,10 +36,10 @@ class main extends PluginBase implements Listener{
    switch($command->getName()){
      case "ngword":
       if($args[0]!==null){
-        $ngwlist = $this->config->get('NGWord');
+        $ngwlist = $this->getConfig()->get('NGWord');
         $ngwlist[] = "$args[0]";
-        $this->config->set("NGWord",$ngwlist);
-        $this->config->save();
+        $this->getConfig()->set("NGWord",$ngwlist);
+        $this->getConfig()->save();
         $sender->sendMessage($args[0]."をNGワードに登録しました！");
         return true; 
       }
