@@ -14,7 +14,7 @@ use pocketmine\command\CommandSender;
 class main extends PluginBase implements Listener{
   public function onEnable(){
     $this->getLogger()->notice("読み込まれました");
-    $config = $this->getConfig();
+    $this->config = $this->getConfig();
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
   }
 
@@ -22,25 +22,33 @@ class main extends PluginBase implements Listener{
    $message = $event->getMessage();
    $ngwords = $this->getConfig()->get('NGWord');
 $player = $event->getPlayer();
-   foreach($ngwords as $value){
-     if(preg_match('{'.$value.'}',$message)){
-      $playername=$player->getName();
-     $blacklist = $this->getConfig()->get('Blacklist');
-          $blacklist[] = "$playername";
-        $this->getConfig()->set("Blacklist",$blacklist);
-        
-        foreach($blacklist as $banname){
-          if($banname === $playername){
-            $player->setBanned("NGワードの発言につきBANしました");
-          }
-        }
-      $this->getConfig()->save();
-      $event->setCancelled();
-     break;
+$playername=$player->getName();
+$blacklist = $this->getConfig()->get('Blacklist');
+   $foundwords = [];
+$blacklist = $this->getConfig()->get('Blacklist', []); // 存在しないときは空の配列を代入
+foreach ($ngwords as $value) { // なるべくループ内で多くの処理をしない
+    //if (preg_match('{' . $value . '}', $message)) { 使わない
+    if (strpos($message, $value) !== false) { // この方が処理は軽い
+        $foundwords[] = $value;
     }
-   }
+}
+if (!empty($foundwords)) { // 1つでも見つかってたとき
+    if (in_array($playername, $blacklist)) {
+        // 2回目
+    $player->setBanned('NGWord:' . implode(', ', $foundwords));
+        unset($blacklist[array_search($playername, $blacklist)]);
+        $blacklist = array_values($blacklist);
+    } else {
+        // 1回目
+        $blacklist[] = $playername; // クォーテーションで囲む必要ないですよ
+    }
+    // 変更した $blacklist をセット
+    $this->config->set('Blacklist', $blacklist);
+    $this->config->save();
+}
+ 
   }
-  public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
+public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
    switch($command->getName()){
      case "ngword":
       if(isset($args[0])){
@@ -54,5 +62,8 @@ $player = $event->getPlayer();
       default:
         return false;
    }   
-  }
+  
 }
+
+}
+
