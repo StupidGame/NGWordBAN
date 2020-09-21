@@ -16,6 +16,7 @@ class main extends PluginBase implements Listener {
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
   }
 
+  
   public function onChat(PlayerChatEvent $event) {
     $message = $event->getMessage();
     $ngwords = $this->config->get('NGWord');
@@ -32,6 +33,7 @@ class main extends PluginBase implements Listener {
     }
     if (!empty($foundwords)) { // 1つでも見つかってたとき
       if (in_array($playername, $blacklist)) {
+
         // 2回目
         $player->setBanned('NGWord:' . implode(', ', $foundwords));
         unset($blacklist[array_search($playername, $blacklist)]);
@@ -46,6 +48,7 @@ class main extends PluginBase implements Listener {
     }
   }
 
+  
   public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool {
     switch($command->getName()) {
       case 'ngword':
@@ -61,5 +64,6 @@ class main extends PluginBase implements Listener {
         return false;
     }
   }
+
 }
 
