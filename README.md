@@ -8,6 +8,7 @@ NGワードを発言するとBANします
 /ngword(ngw) [NGワード]
 
 ## config.ymlで登録  
-```NGWord:   -hoge  ```
+```NGWord:
+          -hoge  ```
 
-NGワードを発言した人はまずconfig.ymlのBlacklistに名前が書き込まれ、再度NGワードを発言した場合にBANされます
+Gワードを発言した人はまずconfig.ymlのBlacklistに名前が書き込まれ、再度NGワードを発言した場合にBANされます
