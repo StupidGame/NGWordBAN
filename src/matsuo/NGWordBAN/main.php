@@ -21,18 +21,18 @@ class main extends PluginBase implements Listener{
   public function onChat(PlayerChatEvent $event){
    $message = $event->getMessage();
    $ngwords = $this->getConfig()->get('NGWord');
-$player = $event->getPlayer();
-$playername=$player->getName();
-$blacklist = $this->getConfig()->get('Blacklist');
+   $player = $event->getPlayer();
+   $playername=$player->getName();
+   $blacklist = $this->getConfig()->get('Blacklist');
    $foundwords = [];
-$blacklist = $this->getConfig()->get('Blacklist', []); // 存在しないときは空の配列を代入
-foreach ($ngwords as $value) { // なるべくループ内で多くの処理をしない
+   $blacklist = $this->getConfig()->get('Blacklist', []); // 存在しないときは空の配列を代入
+    foreach ($ngwords as $value) { // なるべくループ内で多くの処理をしない
     //if (preg_match('{' . $value . '}', $message)) { 使わない
     if (strpos($message, $value) !== false) { // この方が処理は軽い
         $foundwords[] = $value;
     }
-}
-if (!empty($foundwords)) { // 1つでも見つかってたとき
+  }
+ if (!empty($foundwords)) { // 1つでも見つかってたとき
     if (in_array($playername, $blacklist)) {
         // 2回目
     $player->setBanned('NGWord:' . implode(', ', $foundwords));
@@ -45,10 +45,10 @@ if (!empty($foundwords)) { // 1つでも見つかってたとき
     // 変更した $blacklist をセット
     $this->config->set('Blacklist', $blacklist);
     $this->config->save();
-}
- 
   }
-public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
+ }
+
+  public function oncommand(CommandSender $sender, Command $command, string $label, array $args)  :  bool {
    switch($command->getName()){
      case "ngword":
       if(isset($args[0])){
@@ -63,7 +63,7 @@ public function oncommand(CommandSender $sender, Command $command, string $label
         return false;
    }   
   
-}
+  }
 
 }
 
