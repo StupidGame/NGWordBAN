@@ -21,3 +21,6 @@ mixpowder様
 meshida様
 でーしー様
 yuko fuyutsuki様
+
+MCBEフォーラム
+https://forum.mcbe.jp/resources/610/
