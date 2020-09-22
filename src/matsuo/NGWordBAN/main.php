@@ -9,7 +9,7 @@ use pocketmine\utils\Config;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 
-class main extends PluginBase implements Listener {
+class Main extends PluginBase implements Listener {
   public function onEnable() {
     $this->getLogger()->notice('読み込まれました');
     $this->config = $this->getConfig();
